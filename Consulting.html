@@ -1,0 +1,935 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>IRKA Konsultan— Pendamping Sertifikasi Halal · NIB · PIRT</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700;900&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --hijau: #1a6b3c;
+    --hijau-muda: #2d9655;
+    --hijau-terang: #4eba78;
+    --hijau-pucat: #e8f6ed;
+    --emas: #c8931a;
+    --emas-muda: #f0b429;
+    --emas-pucat: #fef8e8;
+    --putih: #ffffff;
+    --abu-terang: #f7f8f6;
+    --abu: #8a9080;
+    --hitam: #1a1f14;
+    --gelap: #2c3325;
+  }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    font-family: 'DM Sans', sans-serif;
+    background: var(--putih);
+    color: var(--hitam);
+    overflow-x: hidden;
+  }
+
+  /* ── NAV ── */
+  nav {
+    position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+    display: flex; align-items: center; justify-content: space-between;
+    padding: 1rem 4%;
+    background: rgba(255,255,255,0.92);
+    backdrop-filter: blur(12px);
+    border-bottom: 1px solid rgba(26,107,60,0.1);
+  }
+  .nav-logo {
+    display: flex; align-items: center; gap: 10px;
+    font-family: 'Playfair Display', serif;
+    font-size: 1.3rem; font-weight: 700;
+    color: var(--hijau);
+    text-decoration: none;
+  }
+  .logo-icon {
+    width: 36px; height: 36px; background: var(--hijau);
+    border-radius: 8px; display: flex; align-items: center; justify-content: center;
+  }
+  .logo-icon svg { width: 20px; height: 20px; fill: white; }
+  .nav-links { display: flex; gap: 2rem; list-style: none; }
+  .nav-links a {
+    text-decoration: none; font-size: 0.9rem; font-weight: 500;
+    color: var(--gelap); transition: color 0.2s;
+  }
+  .nav-links a:hover { color: var(--hijau); }
+  .nav-cta {
+    background: var(--hijau); color: white;
+    padding: 0.6rem 1.4rem; border-radius: 50px;
+    font-size: 0.9rem; font-weight: 500;
+    text-decoration: none; transition: background 0.2s, transform 0.1s;
+  }
+  .nav-cta:hover { background: var(--hijau-muda); transform: translateY(-1px); }
+
+  /* ── HERO ── */
+  .hero {
+    min-height: 100vh;
+    display: grid; grid-template-columns: 1fr 1fr;
+    align-items: center;
+    padding: 7rem 4% 4rem;
+    background: linear-gradient(135deg, #f0f9f4 0%, #e8f6ed 40%, #fef8e8 100%);
+    position: relative;
+    overflow: hidden;
+  }
+  .hero::before {
+    content: '';
+    position: absolute; top: -80px; right: -80px;
+    width: 500px; height: 500px;
+    border-radius: 50%;
+    background: radial-gradient(circle, rgba(26,107,60,0.08) 0%, transparent 70%);
+    pointer-events: none;
+  }
+  .hero::after {
+    content: '';
+    position: absolute; bottom: -60px; left: -60px;
+    width: 400px; height: 400px;
+    border-radius: 50%;
+    background: radial-gradient(circle, rgba(200,147,26,0.07) 0%, transparent 70%);
+    pointer-events: none;
+  }
+  .hero-text { position: relative; z-index: 2; }
+  .hero-badge {
+    display: inline-flex; align-items: center; gap: 6px;
+    background: var(--hijau-pucat); border: 1px solid rgba(26,107,60,0.2);
+    color: var(--hijau); padding: 0.4rem 1rem;
+    border-radius: 50px; font-size: 0.8rem; font-weight: 500;
+    margin-bottom: 1.5rem;
+    animation: fadeInUp 0.6s ease both;
+  }
+  .hero-badge::before { content: '✦'; font-size: 0.7rem; }
+  .hero h1 {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(2.4rem, 4.5vw, 3.8rem);
+    font-weight: 900; line-height: 1.1;
+    color: var(--gelap);
+    margin-bottom: 1.2rem;
+    animation: fadeInUp 0.7s 0.1s ease both;
+  }
+  .hero h1 em {
+    font-style: normal; color: var(--hijau);
+    position: relative;
+  }
+  .hero h1 em::after {
+    content: '';
+    position: absolute; left: 0; bottom: -4px; right: 0; height: 3px;
+    background: var(--emas);
+    border-radius: 2px;
+  }
+  .hero-sub {
+    font-size: 1.05rem; color: #4a5240; line-height: 1.7;
+    max-width: 480px; margin-bottom: 2rem;
+    font-weight: 400;
+    animation: fadeInUp 0.7s 0.2s ease both;
+  }
+  .hero-actions {
+    display: flex; gap: 1rem; flex-wrap: wrap;
+    animation: fadeInUp 0.7s 0.3s ease both;
+  }
+  .btn-primary {
+    display: inline-flex; align-items: center; gap: 8px;
+    background: var(--hijau); color: white;
+    padding: 0.85rem 1.8rem; border-radius: 50px;
+    font-size: 0.95rem; font-weight: 600;
+    text-decoration: none; transition: all 0.2s;
+    box-shadow: 0 4px 20px rgba(26,107,60,0.25);
+  }
+  .btn-primary:hover { background: var(--hijau-muda); transform: translateY(-2px); box-shadow: 0 8px 28px rgba(26,107,60,0.3); }
+  .btn-secondary {
+    display: inline-flex; align-items: center; gap: 8px;
+    background: transparent; color: var(--hijau);
+    padding: 0.85rem 1.8rem; border-radius: 50px;
+    font-size: 0.95rem; font-weight: 600;
+    text-decoration: none; border: 2px solid var(--hijau);
+    transition: all 0.2s;
+  }
+  .btn-secondary:hover { background: var(--hijau-pucat); transform: translateY(-2px); }
+
+  /* HERO STATS CARD */
+  .hero-visual {
+    display: flex; justify-content: center; align-items: center;
+    position: relative; z-index: 2;
+    animation: fadeInRight 0.8s 0.2s ease both;
+  }
+  .stats-card {
+    background: white;
+    border-radius: 24px;
+    padding: 2.5rem;
+    box-shadow: 0 20px 60px rgba(26,107,60,0.15), 0 4px 16px rgba(0,0,0,0.06);
+    max-width: 360px; width: 100%;
+    position: relative;
+  }
+  .stats-card-header {
+    display: flex; align-items: center; gap: 12px;
+    margin-bottom: 1.5rem;
+    padding-bottom: 1.2rem;
+    border-bottom: 1px solid #eef3ec;
+  }
+  .stats-card-logo {
+    width: 48px; height: 48px; background: var(--hijau);
+    border-radius: 12px; display: flex; align-items: center; justify-content: center;
+  }
+  .stats-card-logo svg { width: 26px; height: 26px; fill: white; }
+  .stats-card-title { font-size: 1rem; font-weight: 600; color: var(--gelap); }
+  .stats-card-sub { font-size: 0.8rem; color: var(--abu); margin-top: 2px; }
+  .stat-row {
+    display: flex; align-items: center; justify-content: space-between;
+    padding: 1rem 0; border-bottom: 1px solid #f0f5ee;
+  }
+  .stat-row:last-child { border-bottom: none; }
+  .stat-label { display: flex; align-items: center; gap: 10px; }
+  .stat-dot {
+    width: 10px; height: 10px; border-radius: 50%;
+  }
+  .stat-dot.hijau { background: var(--hijau); }
+  .stat-dot.emas { background: var(--emas); }
+  .stat-dot.biru { background: #2563eb; }
+  .stat-label-text { font-size: 0.9rem; color: #4a5240; }
+  .stat-number {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.6rem; font-weight: 700; color: var(--hijau);
+  }
+  .stat-number.emas { color: var(--emas); }
+  .stat-number.biru { color: #2563eb; }
+  .progress-bar-wrap { margin-top: 1.5rem; }
+  .progress-label { display: flex; justify-content: space-between; font-size: 0.8rem; color: var(--abu); margin-bottom: 6px; }
+  .progress-bar {
+    height: 8px; background: #eef3ec; border-radius: 99px; overflow: hidden;
+  }
+  .progress-fill {
+    height: 100%; border-radius: 99px; background: var(--hijau);
+    animation: growBar 1.5s 0.8s ease both;
+    transform-origin: left;
+  }
+  @keyframes growBar { from { width: 0 !important; } }
+
+  .float-badge {
+    position: absolute; top: -16px; right: -16px;
+    background: var(--emas); color: white;
+    padding: 0.5rem 0.9rem; border-radius: 50px;
+    font-size: 0.8rem; font-weight: 600;
+    box-shadow: 0 4px 12px rgba(200,147,26,0.3);
+  }
+
+  /* ── LAYANAN ── */
+  .section { padding: 5rem 4%; }
+  .section-label {
+    font-size: 0.8rem; font-weight: 600; letter-spacing: 2px;
+    text-transform: uppercase; color: var(--hijau);
+    margin-bottom: 0.75rem;
+  }
+  .section-title {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(2rem, 3.5vw, 2.8rem);
+    font-weight: 900; color: var(--gelap);
+    line-height: 1.2; margin-bottom: 1rem;
+  }
+  .section-desc {
+    font-size: 1rem; color: var(--abu); max-width: 520px; line-height: 1.7;
+  }
+  .section-header { margin-bottom: 3.5rem; }
+
+  .services-grid {
+    display: grid; grid-template-columns: repeat(3, 1fr);
+    gap: 1.5rem;
+  }
+  .service-card {
+    background: var(--putih);
+    border: 1px solid #e2ece6;
+    border-radius: 20px;
+    padding: 2rem;
+    transition: all 0.3s;
+    position: relative;
+    overflow: hidden;
+  }
+  .service-card::before {
+    content: '';
+    position: absolute; bottom: 0; right: 0;
+    width: 80px; height: 80px;
+    border-radius: 50%;
+    opacity: 0.06;
+    transition: all 0.3s;
+  }
+  .service-card.halal::before { background: var(--hijau); }
+  .service-card.nib::before { background: #2563eb; }
+  .service-card.pirt::before { background: var(--emas); }
+  .service-card:hover {
+    transform: translateY(-6px);
+    box-shadow: 0 16px 40px rgba(0,0,0,0.1);
+    border-color: transparent;
+  }
+  .service-card.halal:hover { box-shadow: 0 16px 40px rgba(26,107,60,0.15); }
+  .service-card.nib:hover { box-shadow: 0 16px 40px rgba(37,99,235,0.15); }
+  .service-card.pirt:hover { box-shadow: 0 16px 40px rgba(200,147,26,0.15); }
+
+  .service-icon {
+    width: 56px; height: 56px; border-radius: 14px;
+    display: flex; align-items: center; justify-content: center;
+    margin-bottom: 1.2rem; font-size: 1.5rem;
+  }
+  .service-icon.halal { background: var(--hijau-pucat); }
+  .service-icon.nib { background: #eff6ff; }
+  .service-icon.pirt { background: var(--emas-pucat); }
+  .service-name {
+    font-size: 1.2rem; font-weight: 700; color: var(--gelap);
+    margin-bottom: 0.3rem;
+  }
+  .service-tag {
+    display: inline-block; font-size: 0.75rem; font-weight: 600;
+    padding: 0.2rem 0.7rem; border-radius: 50px; margin-bottom: 0.9rem;
+  }
+  .service-tag.halal { background: var(--hijau-pucat); color: var(--hijau); }
+  .service-tag.nib { background: #eff6ff; color: #2563eb; }
+  .service-tag.pirt { background: var(--emas-pucat); color: var(--emas); }
+  .service-desc { font-size: 0.9rem; color: #4a5240; line-height: 1.6; margin-bottom: 1.2rem; }
+  .service-features { list-style: none; }
+  .service-features li {
+    font-size: 0.85rem; color: #5a6450; padding: 0.35rem 0;
+    display: flex; align-items: center; gap: 8px;
+    border-bottom: 1px solid #f0f5ee;
+  }
+  .service-features li:last-child { border-bottom: none; }
+  .service-features li::before {
+    content: '✓'; font-weight: 700; font-size: 0.8rem; flex-shrink: 0;
+    color: var(--hijau);
+  }
+
+  /* ── ANGKA ── */
+  .stats-section {
+    background: var(--gelap);
+    padding: 4.5rem 4%;
+    text-align: center;
+    position: relative; overflow: hidden;
+  }
+  .stats-section::before {
+    content: '';
+    position: absolute; top: 0; left: 0; right: 0; bottom: 0;
+    background: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%232d9655' fill-opacity='0.06'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
+    pointer-events: none;
+  }
+  .stats-grid {
+    display: grid; grid-template-columns: repeat(4, 1fr);
+    gap: 2rem; max-width: 900px; margin: 0 auto;
+    position: relative; z-index: 1;
+  }
+  .stat-item { color: white; }
+  .stat-item-num {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(2.5rem, 4vw, 3.5rem);
+    font-weight: 900; color: var(--emas-muda);
+    display: block; line-height: 1;
+  }
+  .stat-item-label {
+    font-size: 0.85rem; color: rgba(255,255,255,0.65);
+    margin-top: 0.5rem; line-height: 1.4;
+  }
+
+  /* ── PROSES ── */
+  .proses-section { background: var(--abu-terang); padding: 5rem 4%; }
+  .steps-grid {
+    display: grid; grid-template-columns: repeat(5, 1fr);
+    gap: 0; position: relative; margin-top: 3rem;
+  }
+  .steps-grid::before {
+    content: '';
+    position: absolute; top: 28px; left: 10%; right: 10%;
+    height: 2px; background: linear-gradient(90deg, var(--hijau), var(--emas));
+    z-index: 0;
+  }
+  .step {
+    text-align: center; padding: 0 0.5rem;
+    position: relative; z-index: 1;
+  }
+  .step-num {
+    width: 56px; height: 56px; border-radius: 50%;
+    background: white; border: 3px solid var(--hijau);
+    display: flex; align-items: center; justify-content: center;
+    margin: 0 auto 1rem;
+    font-family: 'Playfair Display', serif;
+    font-size: 1.2rem; font-weight: 700; color: var(--hijau);
+    box-shadow: 0 4px 16px rgba(26,107,60,0.15);
+  }
+  .step-title { font-size: 0.85rem; font-weight: 600; color: var(--gelap); margin-bottom: 0.4rem; }
+  .step-desc { font-size: 0.78rem; color: var(--abu); line-height: 1.5; }
+
+  /* ── TESTIMONI ── */
+  .testi-section { padding: 5rem 4%; }
+  .testi-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.5rem; }
+  .testi-card {
+    background: white; border: 1px solid #e2ece6; border-radius: 20px;
+    padding: 1.8rem; transition: transform 0.2s, box-shadow 0.2s;
+  }
+  .testi-card:hover { transform: translateY(-4px); box-shadow: 0 12px 32px rgba(0,0,0,0.08); }
+  .testi-stars { color: var(--emas); margin-bottom: 0.8rem; font-size: 0.9rem; }
+  .testi-text { font-size: 0.9rem; color: #4a5240; line-height: 1.7; margin-bottom: 1.2rem; font-style: italic; }
+  .testi-profile { display: flex; align-items: center; gap: 10px; }
+  .testi-avatar {
+    width: 40px; height: 40px; border-radius: 50%;
+    background: var(--hijau-pucat); border: 2px solid var(--hijau-terang);
+    display: flex; align-items: center; justify-content: center;
+    font-size: 0.85rem; font-weight: 700; color: var(--hijau);
+  }
+  .testi-name { font-size: 0.9rem; font-weight: 600; color: var(--gelap); }
+  .testi-usaha { font-size: 0.78rem; color: var(--abu); }
+  .testi-badge {
+    margin-left: auto;
+    background: var(--hijau-pucat); color: var(--hijau);
+    padding: 0.2rem 0.6rem; border-radius: 50px;
+    font-size: 0.72rem; font-weight: 600;
+  }
+
+  /* ── FAQ ── */
+  .faq-section { background: var(--abu-terang); padding: 5rem 4%; }
+  .faq-wrap { max-width: 720px; margin: 3rem auto 0; }
+  .faq-item {
+    background: white; border-radius: 14px;
+    margin-bottom: 0.75rem; overflow: hidden;
+    border: 1px solid #e2ece6;
+  }
+  .faq-q {
+    width: 100%; background: none; border: none;
+    padding: 1.2rem 1.5rem; cursor: pointer;
+    display: flex; align-items: center; justify-content: space-between;
+    font-family: 'DM Sans', sans-serif;
+    font-size: 0.95rem; font-weight: 600; color: var(--gelap);
+    text-align: left;
+  }
+  .faq-arrow {
+    width: 24px; height: 24px; border-radius: 50%;
+    background: var(--hijau-pucat); color: var(--hijau);
+    display: flex; align-items: center; justify-content: center;
+    font-size: 0.9rem; transition: transform 0.3s; flex-shrink: 0;
+  }
+  .faq-a {
+    max-height: 0; overflow: hidden;
+    transition: max-height 0.3s ease, padding 0.3s;
+    padding: 0 1.5rem;
+    font-size: 0.88rem; color: #4a5240; line-height: 1.7;
+  }
+  .faq-item.open .faq-a { max-height: 200px; padding: 0 1.5rem 1.2rem; }
+  .faq-item.open .faq-arrow { transform: rotate(45deg); background: var(--hijau); color: white; }
+
+  /* ── CTA ── */
+  .cta-section {
+    background: linear-gradient(135deg, var(--hijau) 0%, #145e33 50%, #0e4526 100%);
+    padding: 5rem 4%; text-align: center;
+    position: relative; overflow: hidden;
+  }
+  .cta-section::before {
+    content: '';
+    position: absolute; top: -100px; right: -100px;
+    width: 400px; height: 400px; border-radius: 50%;
+    background: rgba(255,255,255,0.04);
+  }
+  .cta-section::after {
+    content: '';
+    position: absolute; bottom: -80px; left: -80px;
+    width: 300px; height: 300px; border-radius: 50%;
+    background: rgba(200,147,26,0.1);
+  }
+  .cta-content { position: relative; z-index: 1; }
+  .cta-badge {
+    display: inline-flex; align-items: center; gap: 6px;
+    background: rgba(255,255,255,0.15); color: white;
+    padding: 0.4rem 1rem; border-radius: 50px;
+    font-size: 0.8rem; font-weight: 500;
+    margin-bottom: 1.5rem;
+    border: 1px solid rgba(255,255,255,0.2);
+  }
+  .cta-title {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(2rem, 4vw, 3.2rem);
+    font-weight: 900; color: white;
+    line-height: 1.2; margin-bottom: 1rem;
+  }
+  .cta-title span { color: var(--emas-muda); }
+  .cta-sub { font-size: 1rem; color: rgba(255,255,255,0.75); margin-bottom: 2.5rem; line-height: 1.6; }
+  .cta-buttons { display: flex; gap: 1rem; justify-content: center; flex-wrap: wrap; }
+  .btn-wa {
+    display: inline-flex; align-items: center; gap: 10px;
+    background: #25d366; color: white;
+    padding: 1rem 2.2rem; border-radius: 50px;
+    font-size: 1rem; font-weight: 700;
+    text-decoration: none; transition: all 0.2s;
+    box-shadow: 0 4px 20px rgba(37,211,102,0.35);
+  }
+  .btn-wa:hover { background: #22c25e; transform: translateY(-2px); box-shadow: 0 8px 28px rgba(37,211,102,0.45); }
+  .btn-light {
+    display: inline-flex; align-items: center; gap: 8px;
+    background: rgba(255,255,255,0.15); color: white;
+    padding: 1rem 2.2rem; border-radius: 50px;
+    font-size: 1rem; font-weight: 600;
+    text-decoration: none; transition: all 0.2s;
+    border: 1px solid rgba(255,255,255,0.3);
+  }
+  .btn-light:hover { background: rgba(255,255,255,0.25); transform: translateY(-2px); }
+
+  /* ── FOOTER ── */
+  footer {
+    background: var(--hitam); color: rgba(255,255,255,0.6);
+    padding: 3rem 4% 2rem;
+  }
+  .footer-grid {
+    display: grid; grid-template-columns: 2fr 1fr 1fr;
+    gap: 3rem; margin-bottom: 2.5rem;
+  }
+  .footer-logo-wrap { margin-bottom: 1rem; }
+  .footer-brand {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.3rem; font-weight: 700; color: white;
+    display: flex; align-items: center; gap: 10px; text-decoration: none;
+  }
+  .footer-desc { font-size: 0.85rem; line-height: 1.7; margin-top: 0.8rem; }
+  .footer-heading { font-size: 0.8rem; font-weight: 600; color: white; letter-spacing: 1px; text-transform: uppercase; margin-bottom: 1rem; }
+  .footer-links { list-style: none; }
+  .footer-links li { margin-bottom: 0.5rem; }
+  .footer-links a { font-size: 0.85rem; color: rgba(255,255,255,0.5); text-decoration: none; transition: color 0.2s; }
+  .footer-links a:hover { color: var(--emas-muda); }
+  .footer-bottom {
+    border-top: 1px solid rgba(255,255,255,0.08);
+    padding-top: 1.5rem; display: flex;
+    justify-content: space-between; align-items: center;
+    font-size: 0.8rem;
+  }
+  .footer-bottom a { color: var(--emas-muda); text-decoration: none; }
+
+  /* ANIMATIONS */
+  @keyframes fadeInUp {
+    from { opacity: 0; transform: translateY(20px); }
+    to   { opacity: 1; transform: translateY(0); }
+  }
+  @keyframes fadeInRight {
+    from { opacity: 0; transform: translateX(30px); }
+    to   { opacity: 1; transform: translateX(0); }
+  }
+
+  /* RESPONSIVE */
+  @media (max-width: 900px) {
+    .hero { grid-template-columns: 1fr; text-align: center; }
+    .hero-sub { margin-left: auto; margin-right: auto; }
+    .hero-actions { justify-content: center; }
+    .hero-visual { margin-top: 3rem; }
+    .services-grid { grid-template-columns: 1fr; }
+    .stats-grid { grid-template-columns: repeat(2, 1fr); }
+    .steps-grid { grid-template-columns: 1fr; gap: 1.5rem; }
+    .steps-grid::before { display: none; }
+    .testi-grid { grid-template-columns: 1fr; }
+    .footer-grid { grid-template-columns: 1fr; gap: 2rem; }
+    .footer-bottom { flex-direction: column; gap: 0.5rem; text-align: center; }
+    nav .nav-links { display: none; }
+  }
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <a href="#" class="nav-logo">
+    <div class="logo-icon">
+      <svg viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-1 14H9V8h2v8zm4 0h-2V8h2v8z"/><circle cx="12" cy="12" r="10" fill="none"/><path d="M12 2a10 10 0 100 20A10 10 0 0012 2zm0 18a8 8 0 110-16 8 8 0 010 16zm-1-5h2V7h-2v8zm-3 0h2V9H8v6zm6 0h2V9h-2v6z"/></svg>
+    </div>
+    Irka Consulting
+  </a>
+  <ul class="nav-links">
+    <li><a href="#layanan">Layanan</a></li>
+    <li><a href="#proses">Proses</a></li>
+    <li><a href="#testimoni">Testimoni</a></li>
+    <li><a href="#faq">FAQ</a></li>
+  </ul>
+  <a href="https://wa.me/6282116623080" class="nav-cta">Konsultasi Gratis</a>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-text">
+    <div class="hero-badge">Terpercaya · Berpengalaman · Amanah</div>
+    <h1>Urus Sertifikat <em>Halal, NIB & PIRT</em> Tanpa Ribet</h1>
+    <p class="hero-sub">Kami mendampingi UMKM dari awal hingga sertifikat terbit. Proses cepat, transparan, dan sesuai regulasi terbaru BPJPH & BPOM.</p>
+    <div class="hero-actions">
+      <a href="https://wa.me/6281234567890" class="btn-primary">
+        <svg width="18" height="18" fill="white" viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"/><path d="M12 0C5.373 0 0 5.373 0 12c0 2.126.553 4.124 1.52 5.858L.057 23.982l6.293-1.434A11.955 11.955 0 0012 24c6.627 0 12-5.373 12-12S18.627 0 12 0zm0 22c-1.948 0-3.768-.525-5.332-1.44l-.381-.228-3.961.903.916-3.849-.248-.395A9.961 9.961 0 012 12C2 6.477 6.477 2 12 2s10 4.477 10 10-4.477 10-10 10z"/></svg>
+        Chat WhatsApp
+      </a>
+      <a href="#layanan" class="btn-secondary">Lihat Layanan →</a>
+    </div>
+  </div>
+  <div class="hero-visual">
+    <div class="stats-card">
+      <div class="float-badge">✦ Terpercaya</div>
+      <div class="stats-card-header">
+        <div class="stats-card-logo">
+          <svg viewBox="0 0 24 24"><path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z"/></svg>
+        </div>
+        <div>
+          <div class="stats-card-title">Irka Consulting</div>
+          <div class="stats-card-sub">Pendamping Sertifikasi Resmi</div>
+        </div>
+      </div>
+      <div class="stat-row">
+        <div class="stat-label">
+          <div class="stat-dot hijau"></div>
+          <span class="stat-label-text">Sertifikat Halal Terbit</span>
+        </div>
+        <span class="stat-number">1.000+</span>
+      </div>
+      <div class="stat-row">
+        <div class="stat-label">
+          <div class="stat-dot emas"></div>
+          <span class="stat-label-text">UMKM Didampingi</span>
+        </div>
+        <span class="stat-number emas">800+</span>
+      </div>
+      <div class="stat-row">
+        <div class="stat-label">
+          <div class="stat-dot biru"></div>
+          <span class="stat-label-text">NIB & PIRT Selesai</span>
+        </div>
+        <span class="stat-number biru">500+</span>
+      </div>
+      <div class="progress-bar-wrap">
+        <div class="progress-label"><span>Tingkat Keberhasilan</span><span>98%</span></div>
+        <div class="progress-bar"><div class="progress-fill" style="width: 98%"></div></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- LAYANAN -->
+<section class="section" id="layanan">
+  <div class="section-header">
+    <div class="section-label">Layanan Kami</div>
+    <h2 class="section-title">Tiga Sertifikasi Utama untuk UMKM Anda</h2>
+    <p class="section-desc">Kami hadir sebagai mitra terpercaya dalam setiap langkah proses sertifikasi bisnis Anda.</p>
+  </div>
+  <div class="services-grid">
+    <!-- HALAL -->
+    <div class="service-card halal">
+      <div class="service-icon halal"> <img src="Halal_Indonesia.svg.png" alt=""> </div>
+      <div class="service-name">Sertifikat Halal</div>
+      <div class="service-tag halal">BPJPH · LPPOM MUI</div>
+      <p class="service-desc">Pendampingan lengkap proses sertifikasi halal sesuai regulasi BPJPH terbaru. Dari persiapan dokumen hingga audit dan penerbitan sertifikat.</p>
+      <ul class="service-features">
+        <li>Konsultasi sistem jaminan halal (SJH)</li>
+        <li>Persiapan dokumen & formulir</li>
+        <li>Pendampingan audit halal</li>
+        <li>Proses melalui SIHALAL resmi</li>
+        <li>Notifikasi progres real-time</li>
+      </ul>
+    </div>
+    <!-- NIB -->
+    <div class="service-card nib">
+      <div class="service-icon nib">🏢</div>
+      <div class="service-name">NIB (Nomor Induk Berusaha)</div>
+      <div class="service-tag nib">OSS · Kementerian Investasi</div>
+      <p class="service-desc">Bantuan pendaftaran NIB melalui sistem OSS untuk legalitas usaha Anda. Cepat, mudah, dan tanpa antri di kantor pemerintah.</p>
+      <ul class="service-features">
+        <li>Registrasi akun OSS</li>
+        <li>Input data usaha & klasifikasi KBLI</li>
+        <li>Pengurusan izin usaha terkait</li>
+        <li>NIB terbit dalam 1–3 hari kerja</li>
+        <li>Konsultasi KBLI yang tepat</li>
+      </ul>
+    </div>
+    <!-- PIRT -->
+    <div class="service-card pirt">
+      <div class="service-icon pirt">🍱</div>
+      <div class="service-name">PIRT (Produk Industri Rumah Tangga)</div>
+      <div class="service-tag pirt">Dinas Kesehatan · BPOM</div>
+      <p class="service-desc">Pendampingan izin edar produk pangan olahan rumahan. Wajib bagi UMKM kuliner yang ingin memasarkan produk secara legal.</p>
+      <ul class="service-features">
+        <li>Penyuluhan keamanan pangan (PKP)</li>
+        <li>Pendampingan inspeksi sarana produksi</li>
+        <li>Pengajuan ke Dinas Kesehatan</li>
+        <li>Label & kemasan sesuai standar</li>
+        <li>Pembaruan & perpanjangan izin</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<!-- ANGKA -->
+<div class="stats-section">
+  <div class="stats-grid">
+    <div class="stat-item">
+      <span class="stat-item-num">1.000+</span>
+      <div class="stat-item-label">Sertifikat Halal<br>Berhasil Diterbitkan</div>
+    </div>
+    <div class="stat-item">
+      <span class="stat-item-num">800+</span>
+      <div class="stat-item-label">UMKM yang<br>Berhasil Didampingi</div>
+    </div>
+    <div class="stat-item">
+      <span class="stat-item-num">98%</span>
+      <div class="stat-item-label">Tingkat<br>Keberhasilan</div>
+    </div>
+    <div class="stat-item">
+      <span class="stat-item-num">5+</span>
+      <div class="stat-item-label">Tahun<br>Pengalaman</div>
+    </div>
+  </div>
+</div>
+
+<!-- PROSES -->
+<section class="proses-section" id="proses">
+  <div class="section-header" style="text-align:center">
+    <div class="section-label" style="text-align:center">Cara Kerja</div>
+    <h2 class="section-title" style="text-align:center;margin:0 auto;">Proses Sederhana, Hasil Pasti</h2>
+    <p class="section-desc" style="margin:0 auto;text-align:center;">Lima langkah mudah menuju sertifikat resmi untuk usaha Anda</p>
+  </div>
+  <div class="steps-grid">
+    <div class="step">
+      <div class="step-num">1</div>
+      <div class="step-title">Konsultasi Gratis</div>
+      <div class="step-desc">Ceritakan produk dan kebutuhan usaha Anda via WhatsApp atau tatap muka</div>
+    </div>
+    <div class="step">
+      <div class="step-num">2</div>
+      <div class="step-title">Analisis Dokumen</div>
+      <div class="step-desc">Kami periksa kelengkapan dan kesiapan dokumen usaha Anda</div>
+    </div>
+    <div class="step">
+      <div class="step-num">3</div>
+      <div class="step-title">Persiapan & Input</div>
+      <div class="step-desc">Pendampingan pengisian formulir dan pengajuan ke sistem resmi</div>
+    </div>
+    <div class="step">
+      <div class="step-num">4</div>
+      <div class="step-title">Proses & Monitor</div>
+      <div class="step-desc">Kami pantau progres dan komunikasikan perkembangan secara berkala</div>
+    </div>
+    <div class="step">
+      <div class="step-num">5</div>
+      <div class="step-title">Sertifikat Terbit</div>
+      <div class="step-desc">Sertifikat resmi diterima dan siap digunakan untuk usaha Anda</div>
+    </div>
+  </div>
+</section>
+
+<!-- TESTIMONI -->
+<section class="testi-section" id="testimoni">
+  <div class="section-header">
+    <div class="section-label">Testimoni</div>
+    <h2 class="section-title">Apa Kata Mereka?</h2>
+    <p class="section-desc">Ratusan pelaku UMKM telah mempercayakan proses sertifikasi mereka kepada kami.</p>
+  </div>
+  <div class="testi-grid">
+    <div class="testi-card">
+      <div class="testi-stars">★★★★★</div>
+      <p class="testi-text">"Alhamdulillah sertifikat Halal produk roti Anggun sudah terbit secara  gratis , dan ucapan terimakasih kepada ibuk Karin sebagai pendamping, semoga jasa dan usaha bantuan buk Karin di balas oleh Allah SWT, Aamin 3x ya Allah"</p>
+      <div class="testi-profile">
+        <div class="testi-avatar">ZJ</div>
+        <div>
+          <div class="testi-name">Zurman Jun</div>
+          <div class="testi-usaha">Roti Anggun, Padang</div>
+        </div>
+        <span class="testi-badge">Halal + NIB</span>
+      </div>
+    </div>
+    <div class="testi-card">
+      <div class="testi-stars">★★★★★</div>
+      <p class="testi-text">"Alhamdulillah... Pengurusan Sertifikasinya gak ribet 😍🙏
+Terimakasih Ibu Karin atas arahan & bimbingannya yg selalu memudahkan pelaku UMKM untuk proses sertifikasi Halal ini. …"</p>
+      <div class="testi-profile">
+        <div class="testi-avatar">DN</div>
+        <div>
+          <div class="testi-name">Dian Noviany</div>
+          <div class="testi-usaha">D'Nove Homade, Padang</div>
+        </div>
+        <span class="testi-badge">NIB + HALAL </span>
+      </div>
+    </div>
+    <div class="testi-card">
+      <div class="testi-stars">★★★★★</div>
+      <p class="testi-text">"Kita dari tim SATANGAH KALI DUO merasa sangat terbantu dari pendampingannya yang didampingi dari proses awal sampai akhir, pokoknya mantap dah pendampingannya...sukses selalu ya karin..."</p>
+      <div class="testi-profile">
+        <div class="testi-avatar">DZ</div>
+        <div>
+          <div class="testi-name">DZ Alfi</div>
+          <div class="testi-usaha">Kopi Satangah x 2, Padang</div>
+        </div>
+        <span class="testi-badge">Halal</span>
+      </div>
+    </div>
+    <div class="testi-card">
+      <div class="testi-stars">★★★★★</div>
+      <p class="testi-text">"Sangat profesional dan amanah. Saya sudah pakai layanan ini untuk 3 produk berbeda dan semua lancar. Biaya juga transparan, tidak ada biaya tersembunyi."</p>
+      <div class="testi-profile">
+        <div class="testi-avatar">MR</div>
+        <div>
+          <div class="testi-name">Muhammad Rizki</div>
+          <div class="testi-usaha">Kerupuk Rizki, Solok</div>
+        </div>
+        <span class="testi-badge">Halal + PIRT</span>
+      </div>
+    </div>
+    <div class="testi-card">
+      <div class="testi-stars">★★★★★</div>
+      <p class="testi-text">"Proses audit halal yang saya kira rumit ternyata terasa mudah karena dipersiapkan dengan baik. Pendampingnya sabar dan mau menjelaskan detail setiap tahapan."</p>
+      <div class="testi-profile">
+        <div class="testi-avatar">NN</div>
+        <div>
+          <div class="testi-name">Nur Hasanah</div>
+          <div class="testi-usaha">Dodol Kurma Madinah, Padang</div>
+        </div>
+        <span class="testi-badge">Halal</span>
+      </div>
+    </div>
+    <div class="testi-card">
+      <div class="testi-stars">★★★★★</div>
+      <p class="testi-text">"Direkomendasikan oleh teman sesama pelaku UMKM dan ternyata memang memuaskan. Komunikasi lancar, progres selalu diinfokan, dan hasilnya sesuai harapan."</p>
+      <div class="testi-profile">
+        <div class="testi-avatar">DP</div>
+        <div>
+          <div class="testi-name">Dewi Puspita</div>
+          <div class="testi-usaha">Batik Puspita, Padang Panjang</div>
+        </div>
+        <span class="testi-badge">NIB + Halal</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FAQ -->
+<section class="faq-section" id="faq">
+  <div style="text-align:center">
+    <div class="section-label" style="text-align:center">FAQ</div>
+    <h2 class="section-title" style="text-align:center">Pertanyaan yang Sering Ditanyakan</h2>
+  </div>
+  <div class="faq-wrap">
+    <div class="faq-item open">
+      <button class="faq-q" onclick="toggleFaq(this)">
+        Berapa lama proses sertifikat halal selesai?
+        <span class="faq-arrow">+</span>
+      </button>
+      <div class="faq-a">Untuk UMKM dengan produk sederhana, proses sertifikasi halal melalui jalur self-declare biasanya memakan waktu 2–4 minggu sejak dokumen lengkap diterima. Untuk jalur reguler dengan auditor LPPOM dapat memakan waktu 2–3 bulan. Kami akan memberikan estimasi yang akurat setelah konsultasi awal.</div>
+    </div>
+    <div class="faq-item">
+      <button class="faq-q" onclick="toggleFaq(this)">
+        Apakah usaha saya perlu halal? Wajib atau tidak?
+        <span class="faq-arrow">+</span>
+      </button>
+      <div class="faq-a">Berdasarkan Undang-Undang No. 33 Tahun 2014 dan PP No. 39 Tahun 2021, kewajiban sertifikasi halal untuk produk makanan dan minuman diberlakukan secara bertahap. UMKM dengan produk makanan dan minuman sangat dianjurkan segera mengurus agar tidak terkena sanksi dan meningkatkan kepercayaan konsumen.</div>
+    </div>
+    <div class="faq-item">
+      <button class="faq-q" onclick="toggleFaq(this)">
+        Apa saja dokumen yang dibutuhkan untuk PIRT?
+        <span class="faq-arrow">+</span>
+      </button>
+      <div class="faq-a">Dokumen umum yang diperlukan: KTP pemilik, foto produk dan label, daftar bahan baku/komposisi, foto sarana produksi, sertifikat penyuluhan keamanan pangan (PKP), surat keterangan domisili usaha, dan NPWP. Kami bantu persiapkan semuanya agar sesuai standar Dinas Kesehatan setempat.</div>
+    </div>
+    <div class="faq-item">
+      <button class="faq-q" onclick="toggleFaq(this)">
+        Apakah bisa mengurus NIB, Halal, dan PIRT sekaligus?
+        <span class="faq-arrow">+</span>
+      </button>
+      <div class="faq-a">Tentu bisa! Kami menawarkan paket bundling yang lebih efisien dan hemat biaya. Prosesnya dapat berjalan paralel sehingga menghemat waktu. Hubungi kami untuk mendapatkan penawaran paket yang sesuai dengan kebutuhan usaha Anda.</div>
+    </div>
+    <div class="faq-item">
+      <button class="faq-q" onclick="toggleFaq(this)">
+        Berapa biaya jasa pendampingan?
+        <span class="faq-arrow">+</span>
+      </button>
+      <div class="faq-a">Biaya disesuaikan dengan jenis sertifikasi, jenis produk, dan kompleksitas usaha. Kami berkomitmen untuk transparan — tidak ada biaya tersembunyi. Hubungi kami via WhatsApp untuk konsultasi gratis dan penawaran harga yang sesuai kebutuhan Anda.</div>
+    </div>
+    <div class="faq-item">
+      <button class="faq-q" onclick="toggleFaq(this)">
+        Apakah melayani seluruh Indonesia?
+        <span class="faq-arrow">+</span>
+      </button>
+      <div class="faq-a">Ya, kami melayani UMKM di seluruh Indonesia secara online. Untuk wilayah Sumatera Barat, kami juga menyediakan layanan kunjungan langsung dan pendampingan tatap muka. Proses pengajuan ke sistem OSS, SIHALAL, dan Dinas Kesehatan dapat dilakukan secara digital dari mana saja.</div>
+    </div>
+  </div>
+</section>
+
+<!-- CTA -->
+<section class="cta-section">
+  <div class="cta-content">
+    <div class="cta-badge">✦ Konsultasi Gratis Sekarang</div>
+    <h2 class="cta-title">Siap Legalkan Usaha Anda?<br>Mulai dari <span>Konsultasi Gratis!</span></h2>
+    <p class="cta-sub">Bergabung bersama 800+ UMKM yang telah mendapatkan sertifikat resmi.<br>Tim kami siap membantu Anda hari ini.</p>
+    <div class="cta-buttons">
+      <a href="https://wa.me/+6282116623080?text=Halo%2C%20saya%20ingin%20konsultasi%20mengenai%20sertifikasi%20halal%2FNIB%2FPIRT%20untuk%20usaha%20saya." class="btn-wa">
+        <svg width="20" height="20" fill="white" viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"/><path d="M12 0C5.373 0 0 5.373 0 12c0 2.126.553 4.124 1.52 5.858L.057 23.982l6.293-1.434A11.955 11.955 0 0012 24c6.627 0 12-5.373 12-12S18.627 0 12 0zm0 22c-1.948 0-3.768-.525-5.332-1.44l-.381-.228-3.961.903.916-3.849-.248-.395A9.961 9.961 0 012 12C2 6.477 6.477 2 12 2s10 4.477 10 10-4.477 10-10 10z"/></svg>
+        Chat WhatsApp Sekarang
+      </a>
+      <a href="tel:+6282116623080" class="btn-light">📞 Telepon Kami</a>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-grid">
+    <div>
+      <div class="footer-logo-wrap">
+        <a href="#" class="footer-brand">
+          <div class="logo-icon">
+            <svg viewBox="0 0 24 24" width="20" height="20" fill="white"><path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z"/></svg>
+          </div>
+          Irka Consulting
+        </a>
+      </div>
+      <p class="footer-desc">Pendamping profesional sertifikasi Halal, NIB, dan PIRT untuk UMKM Indonesia. Lebih dari 1.000 sertifikat halal telah terbit bersama kami.</p>
+    </div>
+    <div>
+      <div class="footer-heading">Layanan</div>
+      <ul class="footer-links">
+        <li><a href="#">Sertifikat Halal</a></li>
+        <li><a href="#">NIB (Nomor Induk Berusaha)</a></li>
+        <li><a href="#">PIRT</a></li>
+        <li><a href="#">Paket Bundling</a></li>
+        <li><a href="#">Perpanjangan Sertifikat</a></li>
+      </ul>
+    </div>
+    <div>
+      <div class="footer-heading">Informasi</div>
+      <ul class="footer-links">
+        <li><a href="#">Tentang Kami</a></li>
+        <li><a href="#">Blog & Tips UMKM</a></li>
+        <li><a href="#">Syarat & Ketentuan</a></li>
+        <li><a href="#">Hubungi Kami</a></li>
+      </ul>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <span>© 2026 Irka Consulting. Hak cipta dilindungi.</span>
+    <span>Dibuat dengan ❤️ untuk UMKM Indonesia · <a href="https://wa.me/+6282116623080">WhatsApp</a></span>
+  </div>
+</footer>
+
+<script>
+function toggleFaq(btn) {
+  const item = btn.parentElement;
+  const isOpen = item.classList.contains('open');
+  document.querySelectorAll('.faq-item').forEach(i => i.classList.remove('open'));
+  if (!isOpen) item.classList.add('open');
+}
+
+// Animate stats on scroll
+const observer = new IntersectionObserver((entries) => {
+  entries.forEach(entry => {
+    if (entry.isIntersecting) {
+      entry.target.style.animationPlayState = 'running';
+    }
+  });
+}, { threshold: 0.1 });
+
+document.querySelectorAll('.stat-item, .service-card, .step, .testi-card').forEach(el => {
+  observer.observe(el);
+});
+
+// Smooth scroll
+document.querySelectorAll('a[href^="#"]').forEach(a => {
+  a.addEventListener('click', e => {
+    const target = document.querySelector(a.getAttribute('href'));
+    if (target) { e.preventDefault(); target.scrollIntoView({ behavior: 'smooth' }); }
+  });
+});
+</script>
+</body>
+</html>
